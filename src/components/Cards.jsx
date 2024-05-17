@@ -28,7 +28,7 @@ const Cards = ({ item }) => {
 
         axios.post('https://fatherserver.onrender.com/carts', cartItem)
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           if(response){
             refetch(); // refetch cart
               Swal.fire({
@@ -41,7 +41,7 @@ const Cards = ({ item }) => {
           }
         })
         .catch( (error) => {
-          console.log(error.response.data.message);
+         // console.log(error.response.data.message);
           const errorMessage = error.response.data.message;
           Swal.fire({
             position: 'center',

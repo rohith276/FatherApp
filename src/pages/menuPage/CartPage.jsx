@@ -9,7 +9,7 @@ import axios from "axios";
 const CartPage = () => {
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
-  console.log(cart)
+ // console.log(cart)
   const [cartItems, setCartItems] = useState([]);
   
 
@@ -174,7 +174,7 @@ cart.reduce((total, item) => {
                       <input
                         type="number"
                         value={item.quantity}
-                        onChange={() => console.log(item.quantity)}
+                        //onChange={() => console.log(item.quantity)}
                         className="w-10 mx-2 text-center overflow-hidden appearance-none"
                       />
                       <button

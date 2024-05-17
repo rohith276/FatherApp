@@ -42,11 +42,11 @@ function CheckOutForm({ price, cart }) {
     });
 
     if (error) {
-      console.log("[error]", error);
+     // console.log("[error]", error);
       setCardError(error.message);
     } else {
       setCardError("Success!");
-      console.log("[PaymentMethod]", paymentMethod);
+      //console.log("[PaymentMethod]", paymentMethod);
     }
 
     const { paymentIntent, error: confirmError } =
