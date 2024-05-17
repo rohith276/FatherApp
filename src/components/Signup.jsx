@@ -78,7 +78,7 @@ const Signup = () => {
           {/* name */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Name</span>
+              <span className="label-text">Name (min. 5 Characters) </span>
             </label>
             <input
               type="name"
