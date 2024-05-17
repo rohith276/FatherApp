@@ -47,7 +47,7 @@ const AuthProvider = ({children}) => {
             setUser(currentUser);
             if(currentUser){
                 const userInfo ={email: currentUser.email}
-                axios.post('http://fatherserver.onrender.com/jwt', userInfo)
+                axios.post('https://fatherserver.onrender.com/jwt', userInfo)
                   .then( (response) => {
                     // console.log(response.data.token);
                     if(response.data.token){

@@ -12,7 +12,7 @@ const Order = () => {
     queryKey: ["orders", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `http://fatherserver.onrender.com/payments?email=${user?.email}`,
+        `https://fatherserver.onrender.com/payments?email=${user?.email}`,
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -28,7 +28,7 @@ const Order = () => {
 
   const handleRefund = async (transactionId) => {
     try {
-      const res = await fetch("http://fatherserver.onrender.com/refund", {
+      const res = await fetch("https://fatherserver.onrender.com/refund", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

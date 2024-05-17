@@ -8,7 +8,7 @@ const RefundRequests = () => {
   useEffect(() => {
     const fetchRefundRequests = async () => {
       try {
-        const response = await axios.get("http://fatherserver.onrender.com/refund");
+        const response = await axios.get("https://fatherserver.onrender.com/refund");
 
         setRefundRequests(response.data);
       } catch (error) {

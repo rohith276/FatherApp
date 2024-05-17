@@ -3,7 +3,7 @@ import React from 'react'
 
 
 const axiosPublic =  axios.create({
-    baseURL: 'http://fatherserver.onrender.com',
+    baseURL: 'https://fatherserver.onrender.com',
   })
 
 const useAxiosPublic = () => {

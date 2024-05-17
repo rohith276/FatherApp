@@ -33,7 +33,7 @@ const Modal = () => {
           email: data.email,
         };
         axios
-          .post("http://fatherserver.onrender.com/users", userInfor)
+          .post("https://fatherserver.onrender.com/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
@@ -60,7 +60,7 @@ const Modal = () => {
           email: result?.user?.email,
         };
         axios
-          .post("http://fatherserver.onrender.com/users", userInfor)
+          .post("https://fatherserver.onrender.com/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
