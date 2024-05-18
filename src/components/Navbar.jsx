@@ -30,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = (
-    <>
+    <li>
       <li>
         <a href="/" className="text-green">
           Home
@@ -65,7 +65,7 @@ const Navbar = () => {
       <li>
         <a>Offers</a>
       </li>
-    </>
+    </li>
   );
   return (
     <header
@@ -74,9 +74,10 @@ const Navbar = () => {
       <div
         className={`navbar xl:px-24 ${
           isSticky
-            ? "shadow-md bg-base-100 transition-all duration-300 ease-in-out"
+            ? "shadow-md transition-all duration-300 ease-in-out"
             : ""
-        }`}
+       }
+        `}
       >
         <div className="navbar-start">
           <div className="dropdown justify-between">
