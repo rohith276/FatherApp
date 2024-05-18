@@ -41,7 +41,7 @@ const Navbar = () => {
           <summary>Menu</summary>
           <ul className="p-2">
             <li>
-              <Link to="/menu">All</Link>
+              <a><Link to="/menu">All</Link></a>
             </li>
           </ul>
         </details>
