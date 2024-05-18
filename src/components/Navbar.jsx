@@ -30,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = (
-    <li>
+    <>
       <li>
         <a href="/" className="text-green">
           Home
@@ -65,7 +65,7 @@ const Navbar = () => {
       <li>
         <a>Offers</a>
       </li>
-    </li>
+    </>
   );
   return (
     <header
