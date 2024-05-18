@@ -30,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   const navItems = (
-    <>
+    <div>
       <li>
         <a href="/" className="text-green">
           Home
@@ -42,12 +42,6 @@ const Navbar = () => {
           <ul className="p-2">
             <li>
               <a href="/menu">All</a>
-            </li>
-            <li>
-              <a>Salad</a>
-            </li>
-            <li>
-              <a>Pizza</a>
             </li>
           </ul>
         </details>
@@ -71,7 +65,7 @@ const Navbar = () => {
       <li>
         <a>Offers</a>
       </li>
-    </>
+    </div>
   );
   return (
     <header
@@ -163,9 +157,9 @@ const Navbar = () => {
           {/* login button */}
 
           { 
-            user ? <>
+            user ? <div>
            <Profile user={user}/>
-          </> : <button onClick={()=>document.getElementById('my_modal_5').showModal()} className="btn flex items-center gap-2 rounded-full px-6 bg-green text-white">
+          </div> : <button onClick={()=>document.getElementById('my_modal_5').showModal()} className="btn flex items-center gap-2 rounded-full px-6 bg-green text-white">
             <FaRegUser /> Login
           </button>
           }

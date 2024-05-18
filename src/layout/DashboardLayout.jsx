@@ -18,7 +18,7 @@ import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 
 const sharedLinks = (
-  <>
+  <div>
     <li className="mt-3">
       <Link to="/">
         <MdDashboard /> Home
@@ -33,7 +33,7 @@ const sharedLinks = (
     <li>
         <Link to="/menu"><FaQuestionCircle/> Customer Support</Link>
     </li>
-  </>
+  </div>
 );
 
 const DashboardLayout = () => {
