@@ -51,19 +51,25 @@ const Navbar = () => {
           <summary>Services</summary>
           <ul className="p-2">
             <li>
-              <a>Online Order</a>
+              <a><Link to="/menu">Online Order</Link></a>
             </li>
             <li>
-              <a>Table Booking</a>
+              <a onClick={(event) => {
+                event.preventDefault();
+                alert("Sorry, we are currently closed!");
+            }}>Table Booking</a>
             </li>
             <li>
-              <a>Order Tracking</a>
+              <a><Link to="/order">Online Tracking</Link></a>
             </li>
           </ul>
         </details>
       </li>
       <li>
-        <a>Offers</a>
+        <a onClick={(event) => {
+          event.preventDefault();
+          alert("We are planning a cool offers for you. May be next time!");
+      }}>Offers</a>
       </li>
     </>
   );
@@ -137,7 +143,7 @@ const Navbar = () => {
           >
             <div className="indicator">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                // xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"

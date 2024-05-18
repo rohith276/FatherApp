@@ -105,7 +105,7 @@ const Banner = () => {
             Craftsmanship
           </p>
           <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
-            Order Now
+          <Link to="/menu">Order Now</Link>
           </button>
         </div>
         
