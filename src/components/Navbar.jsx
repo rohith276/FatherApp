@@ -80,7 +80,7 @@ const Navbar = () => {
       <div
         className={`navbar xl:px-24 ${
           isSticky
-            ? "shadow-md transition-all duration-300 ease-in-out"
+            ? "shadow-md bg-white transition-all duration-300 ease-in-out"
             : ""
        }
         `}
