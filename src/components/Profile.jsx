@@ -44,14 +44,14 @@ const Profile = ({ user }) => {
           <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
             {/* Sidebar content here */}
             <li>
-              <a href="/update-profile">Profile</a>
+              <link to="/update-profile">Profile</link>
             </li>
             <li>
-              <a href="/order">Order</a>
+              <link to="/order">Order</link>
             </li>
-            <li>
+          {/*  <li>
               <a>Settings</a>
-            </li>
+          </li> */}
             <li>
               <Link to="/dashboard">Dashboard</Link>
             </li>
