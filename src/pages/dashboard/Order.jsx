@@ -15,10 +15,10 @@ const Order = () => {
       return res.data;
     },
   })
-  console.log(orders);
+
   const formatDate = (createAt)=>{
     const createAtDate = new Date(createAt)
-    return createAtDate.tolocalDateString;
+    return createAtDate.toLocaleDateString();
   }
 
   const handleRefund = async (transactionId) => {
@@ -79,7 +79,7 @@ const Order = () => {
                       </td>
                       <td>{item.status}</td>
                       <td>
-                      <Link to="/contact">
+                      <Link to="/menu">
                         <button className="btn btn-sm border-none text-red bg-transparent">Contact</button>
                         </Link>
                       
@@ -99,7 +99,7 @@ const Order = () => {
         </div>
       ) : (
         <div className="text-center mt-20">
-          <p>Cart is empty. Please add products.</p>
+          <p>No orders yet. Start ordering delicious food!</p>
           <Link to="/menu">
             <button className="btn bg-green text-white mt-3">
               Back to Menu

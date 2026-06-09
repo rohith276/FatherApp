@@ -103,6 +103,7 @@ const Modal = () => {
                 type="password"
                 placeholder="password"
                 className="input input-bordered"
+                autoComplete="current-password"
                 {...register("password", { required: true })}
               />
               <label className="label">

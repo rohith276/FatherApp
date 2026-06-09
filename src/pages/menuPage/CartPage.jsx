@@ -4,12 +4,12 @@ import { AuthContext } from "../../contexts/AuthProvider";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
 import {Link} from 'react-router-dom'
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const CartPage = () => {
   const { user } = useContext(AuthContext);
   const [cart, refetch] = useCart();
- // console.log(cart)
+  const axiosSecure = useAxiosSecure();
   const [cartItems, setCartItems] = useState([]);
   
 
@@ -20,26 +20,9 @@ const CartPage = () => {
   // Handle quantity increase
   const handleIncrease = async (item) => {
     try {
-      const response = await fetch(`https://fatherserver.onrender.com/carts/${item._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ quantity: item.quantity + 1 }),
-      });
-
-      if (response.ok) {
-        const updatedCart = cartItems.map((cartItem) => {
-          if (cartItem.id === item.id) {
-            return {
-              ...cartItem,
-              quantity: cartItem.quantity + 1,
-            };
-          }
-          return cartItem;
-        });
+      const response = await axiosSecure.put(`/carts/${item._id}`, { quantity: item.quantity + 1 });
+      if (response.status === 200) {
         await refetch();
-        setCartItems(updatedCart);
       } else {
         console.error("Failed to update quantity");
       }
@@ -51,29 +34,9 @@ const CartPage = () => {
   const handleDecrease = async (item) => {
     if (item.quantity > 1) {
       try {
-        const response = await fetch(
-          `https://fatherserver.onrender.com/carts/${item._id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ quantity: item.quantity - 1 }),
-          }
-        );
-
-        if (response.ok) {
-          const updatedCart = cartItems.map((cartItem) => {
-            if (cartItem.id === item.id) {
-              return {
-                ...cartItem,
-                quantity: cartItem.quantity - 1,
-              };
-            }
-            return cartItem;
-          });
+        const response = await axiosSecure.put(`/carts/${item._id}`, { quantity: item.quantity - 1 });
+        if (response.status === 200) {
           await refetch();
-          setCartItems(updatedCart);
         } else {
           console.error("Failed to update quantity");
         }
@@ -104,7 +67,7 @@ cart.reduce((total, item) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`https://fatherserver.onrender.com/carts/${item._id}`).then(response => {
+        axiosSecure.delete(`/carts/${item._id}`).then(response => {
           if (response) {
             refetch();
              Swal.fire("Deleted!", "Your file has been deleted.", "success");

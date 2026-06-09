@@ -4,7 +4,6 @@ import { FaFacebookF, FaGithub, FaGoogle, FaRegUser } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Modal from "./Modal";
 import { AuthContext } from "../contexts/AuthProvider";
-import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Signup = () => {
@@ -110,6 +109,7 @@ const Signup = () => {
               type="password"
               placeholder="password"
               className="input input-bordered"
+              autoComplete="new-password"
               {...register("password")}
             />
             <label className="label">
