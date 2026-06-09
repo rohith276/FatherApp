@@ -6,7 +6,7 @@ import useCart from "../../hooks/useCart";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Stripe_PK);
 
-function payment() {
+function Payment() {
   const [cart] = useCart();
 
   const calculateTotalPrice = (item) => {
@@ -30,4 +30,4 @@ function payment() {
   );
 }
 
-export default payment;
+export default Payment;

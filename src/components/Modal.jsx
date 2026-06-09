@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../contexts/AuthProvider";
-import axios from "axios";
+import { axiosPublic } from "../hooks/useAxiosPublic";
 
 const Modal = () => {
   const [errorMessage, seterrorMessage] = useState("");
@@ -32,8 +32,8 @@ const Modal = () => {
           name: data.name,
           email: data.email,
         };
-        axios
-          .post("https://fatherserver.onrender.com/users", userInfor)
+        axiosPublic
+          .post("/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
@@ -59,8 +59,8 @@ const Modal = () => {
           name: result?.user?.displayName,
           email: result?.user?.email,
         };
-        axios
-          .post("https://fatherserver.onrender.com/users", userInfor)
+        axiosPublic
+          .post("/users", userInfor)
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");

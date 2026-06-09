@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cards from "../../components/Cards";
 import { FaFilter } from "react-icons/fa";
+import { axiosPublic } from "../../hooks/useAxiosPublic";
 
 const Menu = () => {
   const [menu, setMenu] = useState([]);
@@ -14,10 +15,9 @@ const Menu = () => {
     // Fetch data from the backend
     const fetchData = async () => {
       try {
-        const response = await fetch("https://fatherserver.onrender.com/menu");
-        const data = await response.json();
-        setMenu(data);
-        setFilteredItems(data); // Initially, display all items
+        const response = await axiosPublic.get("/menu");
+        setMenu(response.data);
+        setFilteredItems(response.data); // Initially, display all items
       } catch (error) {
         console.error("Error fetching data:", error);
       }

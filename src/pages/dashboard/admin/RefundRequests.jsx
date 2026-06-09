@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { axiosPublic } from "../../hooks/useAxiosPublic";
 
 const RefundRequests = () => {
   const [refundRequests, setRefundRequests] = useState([]);
@@ -8,7 +8,7 @@ const RefundRequests = () => {
   useEffect(() => {
     const fetchRefundRequests = async () => {
       try {
-        const response = await axios.get("https://fatherserver.onrender.com/refund");
+        const response = await axiosPublic.get("/refund");
 
         setRefundRequests(response.data);
       } catch (error) {

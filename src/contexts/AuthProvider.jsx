@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import { createContext } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import app from '../firebase/firebase.config';
 import axios from 'axios';
+import { axiosPublic } from '../hooks/useAxiosPublic';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -47,7 +48,7 @@ const AuthProvider = ({children}) => {
             setUser(currentUser);
             if(currentUser){
                 const userInfo ={email: currentUser.email}
-                axios.post('https://fatherserver.onrender.com/jwt', userInfo)
+                axiosPublic.post('/jwt', userInfo)
                   .then( (response) => {
                     // console.log(response.data.token);
                     if(response.data.token){

@@ -2,22 +2,17 @@ import React from "react";
 import useAuth from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Order = () => {
   const { user } = useAuth();
-  // console.log(user.email)
-  const token = localStorage.getItem("access-token");
+  const axiosSecure = useAxiosSecure();
 
   const { refetch, data: orders = [] } = useQuery({
     queryKey: ["orders", user?.email],
     queryFn: async () => {
-      const res = await fetch(
-        `https://fatherserver.onrender.com/payments?email=${user?.email}`,
-        {
-          headers: { authorization: `Bearer ${token}` },
-        }
-      );
-      return res.json();
+      const res = await axiosSecure.get(`/payments?email=${user?.email}`);
+      return res.data;
     },
   })
   console.log(orders);
@@ -28,15 +23,8 @@ const Order = () => {
 
   const handleRefund = async (transactionId) => {
     try {
-      const res = await fetch("https://fatherserver.onrender.com/refund", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ transactionId }),
-      });
-      if (res.ok) {
+      const res = await axiosSecure.post("/refund", { transactionId });
+      if (res.status === 200) {
         alert("Refund request submitted successfully!");
         // You can also update UI or trigger a refetch here if needed
       } else {

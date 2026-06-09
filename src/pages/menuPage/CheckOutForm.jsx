@@ -97,6 +97,10 @@ function CheckOutForm({ price, cart }) {
     });
   };
 
+  const handlePayPalPayment = () => {
+    alert("PayPal is not implemented yet");
+  };
+
   return (
     <div className="flex flex-col sm:flex-row justify-start items-start gap-8">
       {/* left side */}

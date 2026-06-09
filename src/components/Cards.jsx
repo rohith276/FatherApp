@@ -4,13 +4,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthProvider";
 import Swal from 'sweetalert2'
 import useCart from "../hooks/useCart";
-import axios from 'axios';
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Cards = ({ item }) => {
   const { name, image, price, recipe, _id } = item;
 
   const {user} = useContext(AuthContext);
   const [cart, refetch] = useCart();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
   // console.log(item)
@@ -26,7 +27,7 @@ const Cards = ({ item }) => {
     if(user && user.email){
         const cartItem = {menuItemId: _id, name, quantity : 1, image, price, email: user.email}
 
-        axios.post('https://fatherserver.onrender.com/carts', cartItem)
+        axiosSecure.post('/carts', cartItem)
         .then((response) => {
           //console.log(response);
           if(response){

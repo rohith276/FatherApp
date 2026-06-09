@@ -79,7 +79,7 @@ const router = createBrowserRouter([
         {
           path: "update-menu/:id",
           element: <UpdateMenu/>,
-          loader: ({params}) => fetch(`https://fatherserver.onrender.com/menu/${params.id}`)
+          loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL || 'https://fatherserver.onrender.com'}/menu/${params.id}`)
         },
         {
           path: "refund",
