@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import { createContext } from 'react';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithRedirect, signOut, updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import app from '../firebase/firebase.config';
@@ -22,7 +22,7 @@ const AuthProvider = ({children}) => {
     }
 
     const signUpWithGmail = () => {
-        return signInWithPopup(auth, googleProvider);
+        return signInWithRedirect(auth, googleProvider);
     }
 
     const login = (email, password) =>{
@@ -42,6 +42,17 @@ const AuthProvider = ({children}) => {
     }
 
     useEffect( () =>{
+        // Handle redirect result from Google sign-in
+        getRedirectResult(auth).then((result) => {
+            if (result) {
+                const userInfor = {
+                    name: result.user?.displayName,
+                    email: result.user?.email,
+                };
+                axiosPublic.post('/users', userInfor).catch(() => {});
+            }
+        }).catch((error) => console.log("Redirect error:", error));
+
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
             // console.log(currentUser);
             setUser(currentUser);
