@@ -29,6 +29,17 @@ const Navbar = () => {
     };
   }, []);
 
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest("details")) {
+        document.querySelectorAll("details").forEach((el) => el.removeAttribute("open"));
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   const closeDropdown = (e) => {
     e.currentTarget.closest('details')?.removeAttribute('open');
   };
@@ -41,10 +52,7 @@ const Navbar = () => {
         </Link>
       </li>
       <li tabIndex={0}>
-        <details
-          onMouseEnter={(e) => e.currentTarget.setAttribute("open", "true")}
-          onMouseLeave={(e) => e.currentTarget.removeAttribute("open")}
-        >
+        <details>
           <summary>Menu</summary>
           <ul className="p-2" onClick={closeDropdown}>
             <li>
@@ -54,10 +62,7 @@ const Navbar = () => {
         </details>
       </li>
       <li tabIndex={0}>
-        <details
-          onMouseEnter={(e) => e.currentTarget.setAttribute("open", "true")}
-          onMouseLeave={(e) => e.currentTarget.removeAttribute("open")}
-        >
+        <details>
           <summary>Services</summary>
           <ul className="p-2" onClick={closeDropdown}>
             <li>
