@@ -37,6 +37,7 @@ const Modal = () => {
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
+            document.getElementById("my_modal_5").close();
             navigate(from, { replace: true });
           });
         // console.log(user);
@@ -64,6 +65,7 @@ const Modal = () => {
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
+            document.getElementById("my_modal_5").close();
             navigate("/");
           });
       })

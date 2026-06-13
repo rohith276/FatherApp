@@ -29,6 +29,10 @@ const Navbar = () => {
     };
   }, []);
 
+  const closeDropdown = (e) => {
+    e.currentTarget.closest('details')?.removeAttribute('open');
+  };
+
   const navItems = (
     <>
       <li>
@@ -37,21 +41,27 @@ const Navbar = () => {
         </Link>
       </li>
       <li tabIndex={0}>
-        <details>
+        <details
+          onMouseEnter={(e) => e.currentTarget.setAttribute("open", "true")}
+          onMouseLeave={(e) => e.currentTarget.removeAttribute("open")}
+        >
           <summary>Menu</summary>
-          <ul className="p-2">
+          <ul className="p-2" onClick={closeDropdown}>
             <li>
-              <a><Link to="/menu">All</Link></a>
+              <Link to="/menu">All</Link>
             </li>
           </ul>
         </details>
       </li>
       <li tabIndex={0}>
-        <details>
+        <details
+          onMouseEnter={(e) => e.currentTarget.setAttribute("open", "true")}
+          onMouseLeave={(e) => e.currentTarget.removeAttribute("open")}
+        >
           <summary>Services</summary>
-          <ul className="p-2">
+          <ul className="p-2" onClick={closeDropdown}>
             <li>
-              <a><Link to="/menu">Online Order</Link></a>
+              <Link to="/menu">Online Order</Link>
             </li>
             <li>
               <a onClick={(event) => {
@@ -60,7 +70,7 @@ const Navbar = () => {
             }}>Table Booking</a>
             </li>
             <li>
-              <a><Link to="/order">Online Tracking</Link></a>
+              <Link to="/order">Online Tracking</Link>
             </li>
           </ul>
         </details>
