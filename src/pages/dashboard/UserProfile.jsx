@@ -11,14 +11,17 @@ const UserProfile = () => {
       } = useForm()
       const onSubmit = (data) => {
         const name = data.name;
-        const photoURL = data.photoURL;
+        const fileList = data.photoURL;
+        // Only update photoURL if a file was actually selected
+        // FileList from file input is not a valid URL - skip it if empty
+        const photoURL = (fileList && fileList.length > 0) ? URL.createObjectURL(fileList[0]) : undefined;
 
         updateUserProfile(name, photoURL).then(() => {
             // Profile updated!
             alert("Profile updated successfully")
           }).catch((error) => {
-            // An error occurred
-            // ...
+            console.error("Profile update error:", error);
+            alert("Failed to update profile. Please try again.");
           });
       }
   return (

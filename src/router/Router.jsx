@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/update-profile",
-          element: <UserProfile/>
+          element: <PrivateRoute><UserProfile/></PrivateRoute>
         },
         {
           path: "/cart-page",

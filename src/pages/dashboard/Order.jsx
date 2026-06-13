@@ -16,9 +16,12 @@ const Order = () => {
     },
   })
 
-  const formatDate = (createAt)=>{
-    const createAtDate = new Date(createAt)
-    return createAtDate.toLocaleDateString();
+  const formatDate = (item) => {
+    const dateValue = item.createdAt || item.createAt;
+    if (!dateValue) return 'N/A';
+    const date = new Date(dateValue);
+    if (isNaN(date.getTime())) return 'N/A';
+    return date.toLocaleDateString();
   }
 
   const handleRefund = async (transactionId) => {
@@ -71,7 +74,7 @@ const Order = () => {
                     <tr key={index}>
                       <td>{index + 1}</td>
                       <td>
-                        {formatDate(item.createdAt)}
+                        {formatDate(item)}
                       </td>
                       <td className="font-medium">{item.transactionId}</td>
                       <td>

@@ -4,6 +4,7 @@ import { FaPaypal } from "react-icons/fa";
 import useAxiosSecure from "./../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
 
 function CheckOutForm({ price, cart }) {
   const stripe = useStripe();
@@ -11,6 +12,7 @@ function CheckOutForm({ price, cart }) {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [, refetchCart] = useCart();
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClintSecret] = useState("");
 
@@ -74,6 +76,7 @@ function CheckOutForm({ price, cart }) {
         menuitem: cart.map((item) => item.menuItemId),
       };
       axiosSecure.post("/payments", paymentsInfo).then((res) => {
+        refetchCart();
         alert("Payment successful!");
         navigate("/order");
       });
@@ -92,6 +95,7 @@ function CheckOutForm({ price, cart }) {
       menuitem: cart.map((item) => item.menuItemId),
     };
     axiosSecure.post("/payments", paymentsInfo).then((res) => {
+      refetchCart();
       alert("Order placed successfully!");
       navigate("/order");
     });
