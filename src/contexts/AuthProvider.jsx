@@ -29,7 +29,7 @@ const AuthProvider = ({children}) => {
     }
 
     const logOut = () =>{
-        localStorage.removeItem('genius-token');
+        localStorage.removeItem('access-token');
         return signOut(auth);
     }
 
@@ -64,11 +64,17 @@ const AuthProvider = ({children}) => {
                         localStorage.setItem("access-token", response.data.token)
                     }
                   })
+                  .catch((error) => {
+                    console.error("Failed to get JWT token:", error);
+                  })
+                  .finally(() => {
+                    // Only stop loading AFTER the token is saved (or failed)
+                    setLoading(false);
+                  });
             } else{
                localStorage.removeItem("access-token")
+               setLoading(false);
             }
-           
-            setLoading(false);
         });
 
         return () =>{
