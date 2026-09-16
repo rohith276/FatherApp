@@ -53,6 +53,14 @@ const Signup = () => {
   // login with google
   const handleRegister = () => {
     signUpWithGmail()
+      .then((result) => {
+        const userInfor = {
+          name: result?.user?.displayName,
+          email: result?.user?.email,
+        };
+        axiosPublic.post("/users", userInfor).catch(() => {});
+        navigate("/");
+      })
       .catch((error) => console.log(error));
   };
   return (
