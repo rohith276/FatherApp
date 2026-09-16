@@ -21,10 +21,12 @@ const AuthProvider = ({children}) => {
     }
 
     const signUpWithGmail = () => {
+        setLoading(true);
         return signInWithRedirect(auth, googleProvider);
     }
 
     const login = (email, password) =>{
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
