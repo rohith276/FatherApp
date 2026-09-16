@@ -39,6 +39,7 @@ const Login = () => {
           .then((response) => {
             // console.log(response);
             alert("Signin successful!");
+            reset();
             navigate(from, { replace: true });
           });
         // console.log(user);
@@ -48,28 +49,11 @@ const Login = () => {
         const errorMessage = error.message;
         seterrorMessage("Please provide valid email & password!");
       });
-      reset()
-
   };
 
   // login with google
-  // login with google
   const handleRegister = () => {
     signUpWithGmail()
-      .then((result) => {
-        const user = result.user;
-        const userInfor = {
-          name: result?.user?.displayName,
-          email: result?.user?.email,
-        };
-        axiosPublic
-          .post("/users", userInfor)
-          .then((response) => {
-            // console.log(response);
-            alert("Signin successful!");
-            navigate("/");
-          });
-      })
       .catch((error) => console.log(error));
   };
   return (

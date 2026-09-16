@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { FaHeart} from "react-icons/fa"
 import Cards from "../../components/Cards";
 import { FaAngleRight, FaAngleLeft  } from "react-icons/fa6";
+import { axiosPublic } from "../../hooks/useAxiosPublic";
 
 const SampleNextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -37,13 +38,12 @@ const SpecialDishes = () => {
   const slider = React.useRef(null);
 
   useEffect(() => {
-    fetch("/menu.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const specials = data.filter((item) => item.category === "popular");
-        // console.log(specials)
+    axiosPublic.get("/menu")
+      .then((res) => {
+        const specials = res.data.filter((item) => item.category === "popular");
         setRecipes(specials);
-      });
+      })
+      .catch((error) => console.error("Error fetching special dishes:", error));
   }, []);
   const settings = {
     dots: true,

@@ -1,5 +1,6 @@
 import React from "react";
 import bannerImg from "/images/home/banner.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -39,6 +40,7 @@ const Banner = () => {
                     type="radio"
                     name="rating-6"
                     className="mask mask-star-2 bg-orange-400"
+                    readOnly
                   />
                   <input
                     type="radio"
@@ -104,9 +106,11 @@ const Banner = () => {
             Where Each Plate Weaves a Story of Culinary Mastery and Passionate
             Craftsmanship
           </p>
-          <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
-          Order Now
-          </button>
+          <Link to="/menu">
+            <button className="bg-green font-semibold btn text-white px-8 py-3 rounded-full">
+            Order Now
+            </button>
+          </Link>
         </div>
         
       </div>

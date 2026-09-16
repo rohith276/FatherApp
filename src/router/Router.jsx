@@ -40,11 +40,11 @@ const router = createBrowserRouter([
         },
         {
           path: "/cart-page",
-          element: <CartPage/>
+          element: <PrivateRoute><CartPage/></PrivateRoute>
         },
         {
           path: "/process-checkout",
-          element: <Payment/>
+          element: <PrivateRoute><Payment/></PrivateRoute>
         }
       ]
     },

@@ -13,7 +13,7 @@ import {
 
 import logo from "/logo.png";
 import { FaCartShopping } from "react-icons/fa6";
-import Login from "../components/Login";
+import LoadingSpinner from "../components/LoadingSpinner";
 import useAdmin from "../hooks/useAdmin";
 import useAuth from "../hooks/useAuth";
 
@@ -28,10 +28,10 @@ const sharedLinks = (
         <Link to="/menu"><FaCartShopping/> Menu</Link>
     </li>
     <li>
-        <Link to="/menu"><FaLocationArrow/> Orders Tracking</Link>
+        <Link to="/order"><FaLocationArrow/> Orders Tracking</Link>
     </li>
     <li>
-        <Link to="/menu"><FaQuestionCircle/> Customer Support</Link>
+        <a onClick={() => alert("Customer support coming soon!")}><FaQuestionCircle/> Customer Support</a>
     </li>
   </div>
 );
@@ -117,7 +117,7 @@ const DashboardLayout = () => {
           }
         </ul>
       </div>
-    </div> : (loading ? <Login/> : <div className="h-screen flex justify-center items-center"><Link to="/"><button className="btn bg-green text-white">Back to Home</button></Link></div>)
+    </div> : (loading ? <LoadingSpinner/> : <div className="h-screen flex justify-center items-center"><Link to="/"><button className="btn bg-green text-white">Back to Home</button></Link></div>)
     }
     </div>
   );

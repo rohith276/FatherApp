@@ -8,7 +8,6 @@ import { FaUtensils } from 'react-icons/fa';
 
 const UpdateMenu = () => {
     const item = useLoaderData();
-    console.log(item);
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
@@ -38,7 +37,7 @@ const UpdateMenu = () => {
         };
   
         // console.log(menuItem);
-        const postMenuItem = axiosSecure.patch(`/menu/${item._id}`, menuItem);
+        const postMenuItem = await axiosSecure.patch(`/menu/${item._id}`, menuItem);
         if(postMenuItem){
           reset()
           Swal.fire({

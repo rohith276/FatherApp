@@ -62,6 +62,11 @@ function CheckOutForm({ price, cart }) {
         },
       });
 
+    if (confirmError) {
+      setCardError(confirmError.message);
+      return;
+    }
+
     if (paymentIntent.status === "succeeded") {
       setCardError(`Your TransactionId : ${paymentIntent.id}`);
 
@@ -73,7 +78,7 @@ function CheckOutForm({ price, cart }) {
         status: "success",
         itemName: cart.map((item) => item.name),
         cartItems: cart.map((item) => item._id),
-        menuitem: cart.map((item) => item.menuItemId),
+        menuItems: cart.map((item) => item.menuItemId),
       };
       axiosSecure.post("/payments", paymentsInfo).then((res) => {
         refetchCart();
@@ -92,7 +97,7 @@ function CheckOutForm({ price, cart }) {
       status: "Cash on delivery", // Status for Cash on Delivery
       itemName: cart.map((item) => item.name),
       cartItems: cart.map((item) => item._id),
-      menuitem: cart.map((item) => item.menuItemId),
+      menuItems: cart.map((item) => item.menuItemId),
     };
     axiosSecure.post("/payments", paymentsInfo).then((res) => {
       refetchCart();
@@ -114,7 +119,7 @@ function CheckOutForm({ price, cart }) {
         <p>Number of Items: {cart.length}</p>
       </div>
       {/* right side */}
-      <div className="md:w-1/2 w-full space-y-6 card shrink-0 max-w-sm shadow-2x1 bg-base-100 px-4 py-8">
+      <div className="md:w-1/2 w-full space-y-6 card shrink-0 max-w-sm shadow-2xl bg-base-100 px-4 py-8">
         <h4 className="text-lg font-semibold">Process Your Payment</h4>
         <h5 className="font-medium">Credit/Debit Card</h5>
 

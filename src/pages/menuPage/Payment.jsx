@@ -22,7 +22,7 @@ function Payment() {
   const orderTotal = cartSubtotal;
 
   return (
-    <div className="max-w-screen-2x1 container mx-auto x1:px-24 px-4 py-28">
+    <div className="max-w-screen-2xl container mx-auto xl:px-24 px-4 py-28">
       <Elements stripe={stripePromise}>
         <CheckOutForm price={orderTotal} cart={cart} />
       </Elements>

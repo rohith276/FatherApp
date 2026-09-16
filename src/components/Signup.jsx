@@ -30,7 +30,7 @@ const Signup = () => {
       .then((result) => {
         // Signed up
         const user = result.user;
-        updateUserProfile(data.email, data.photoURL).then(() => {
+        updateUserProfile(data.name, data.photoURL).then(() => {
           const userInfor = {
             name: data.name,
             email: data.email,
@@ -53,20 +53,6 @@ const Signup = () => {
   // login with google
   const handleRegister = () => {
     signUpWithGmail()
-      .then((result) => {
-        const user = result.user;
-        const userInfor = {
-          name: result?.user?.displayName,
-          email: result?.user?.email,
-        };
-        axiosPublic
-          .post("/users", userInfor)
-          .then((response) => {
-            // console.log(response);
-            alert("Signin successful!");
-            navigate("/");
-          });
-      })
       .catch((error) => console.log(error));
   };
   return (
@@ -83,7 +69,7 @@ const Signup = () => {
               type="name"
               placeholder="Your name"
               className="input input-bordered"
-              {...register("name")}
+              {...register("name", { required: true, minLength: 2 })}
             />
           </div>
 
@@ -96,7 +82,7 @@ const Signup = () => {
               type="email"
               placeholder="email"
               className="input input-bordered"
-              {...register("email")}
+              {...register("email", { required: true })}
             />
           </div>
 
@@ -110,7 +96,7 @@ const Signup = () => {
               placeholder="password"
               className="input input-bordered"
               autoComplete="new-password"
-              {...register("password")}
+              {...register("password", { required: true, minLength: 6 })}
             />
             <label className="label">
               <a href="#" className="label-text-alt link link-hover mt-2">
