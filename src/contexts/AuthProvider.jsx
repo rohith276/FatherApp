@@ -14,6 +14,7 @@ const googleProvider = new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [tokenReady, setTokenReady] = useState(false);
 
     const createUser = (email, password) => {
         setLoading(true);
@@ -32,6 +33,7 @@ const AuthProvider = ({children}) => {
 
     const logOut = () =>{
         localStorage.removeItem('access-token');
+        setTokenReady(false);
         return signOut(auth);
     }
 
@@ -44,27 +46,25 @@ const AuthProvider = ({children}) => {
 
     useEffect( () =>{
         const unsubscribe = onAuthStateChanged(auth, currentUser =>{
-            // console.log(currentUser);
             setUser(currentUser);
+            // Set loading false immediately so the UI can render
+            setLoading(false);
+            
             if(currentUser){
                 const userInfo ={email: currentUser.email}
                 axiosPublic.post('/jwt', userInfo)
                   .then( (response) => {
-                    // console.log(response.data.token);
                     if(response.data.token){
                         localStorage.setItem("access-token", response.data.token)
+                        setTokenReady(true);
                     }
                   })
                   .catch((error) => {
                     console.error("Failed to get JWT token:", error);
-                  })
-                  .finally(() => {
-                    // Only stop loading AFTER the token is saved (or failed)
-                    setLoading(false);
                   });
             } else{
                localStorage.removeItem("access-token")
-               setLoading(false);
+               setTokenReady(false);
             }
         });
 
@@ -76,6 +76,7 @@ const AuthProvider = ({children}) => {
     const authInfo = {
         user, 
         loading,
+        tokenReady,
         createUser, 
         login, 
         logOut,
