@@ -44,15 +44,6 @@ const Modal = () => {
   // login with google
   const handleRegister = () => {
     signUpWithGmail()
-      .then((result) => {
-        const userInfor = {
-          name: result?.user?.displayName,
-          email: result?.user?.email,
-        };
-        axiosPublic.post("/users", userInfor).catch(() => {});
-        document.getElementById("my_modal_5").close();
-        navigate(from, { replace: true });
-      })
       .catch((error) => console.log(error));
   };
 

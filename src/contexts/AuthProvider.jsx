@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import React from 'react';
 import { createContext } from 'react';
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithRedirect, signOut, updateProfile } from 'firebase/auth';
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, getRedirectResult, onAuthStateChanged, signInWithEmailAndPassword, signInWithRedirect, signOut, updateProfile } from 'firebase/auth';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import app from '../firebase/firebase.config';
@@ -23,13 +23,7 @@ const AuthProvider = ({children}) => {
 
     const signUpWithGmail = () => {
         setLoading(true);
-        // Try popup first, fall back to redirect if popup is blocked
-        return signInWithPopup(auth, googleProvider).catch((error) => {
-            if (error.code === 'auth/popup-blocked' || error.code === 'auth/popup-closed-by-user') {
-                return signInWithRedirect(auth, googleProvider);
-            }
-            throw error;
-        });
+        return signInWithRedirect(auth, googleProvider);
     }
 
     const login = (email, password) =>{
