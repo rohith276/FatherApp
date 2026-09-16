@@ -26,26 +26,17 @@ const Modal = () => {
     const password = data.password;
     login(email, password)
       .then((result) => {
-        // Signed in
-        const user = result.user;
         const userInfor = {
           name: data.name,
           email: data.email,
         };
-        axiosPublic
-          .post("/users", userInfor)
-          .then((response) => {
-            // console.log(response);
-            alert("Signin successful!");
-            reset();
-            document.getElementById("my_modal_5").close();
-            navigate(from, { replace: true });
-          });
-        // console.log(user);
-        // ...
+        // Fire in background — don't block UI
+        axiosPublic.post("/users", userInfor).catch(() => {});
+        reset();
+        document.getElementById("my_modal_5").close();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
-        const errorMessage = error.message;
         seterrorMessage("Please provide valid email & password!");
       });
   };

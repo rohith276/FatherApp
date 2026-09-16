@@ -25,28 +25,19 @@ const Signup = () => {
   const onSubmit = (data) => {
     const email = data.email;
     const password = data.password;
-    // console.log(email, password)
     createUser(email, password)
       .then((result) => {
-        // Signed up
-        const user = result.user;
         updateUserProfile(data.name, data.photoURL).then(() => {
           const userInfor = {
             name: data.name,
             email: data.email,
           };
-          axiosPublic.post("/users", userInfor)
-            .then((response) => {
-              // console.log(response);
-              alert("Signin successful!");
-              navigate(from, { replace: true });
-            });
+          axiosPublic.post("/users", userInfor).catch(() => {});
+          navigate(from, { replace: true });
         });
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
       });
   };
 
